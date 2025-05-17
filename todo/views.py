@@ -22,7 +22,7 @@ class TodoViewSet(ModelViewSet):
     pagination_class = PageNumberPagination
     def get_queryset(self):
         user = self.request.user
-        return Task.objects.filter(author=user)
+        return Task.objects.filter(author=user).order_by('-created_at')
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
